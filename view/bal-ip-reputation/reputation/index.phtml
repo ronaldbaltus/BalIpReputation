@@ -1,0 +1,47 @@
+<?php echo $this->headLink()->appendStylesheet($this->basePath() . '/css/ipreputation.css'); ?>
+
+<?php foreach ($this->ipAddresses as $ip): ?>
+<h3><?=$ip?></h3>
+
+<div class="step">
+    <span class="field">Blacklist</span>
+    <pre>
+    <?php
+    
+    $blacklists = $this->blacklists->getIP($ip);
+    if (count($blacklists) == 0) {
+        echo "Not blacklisted";
+    } else {
+        echo implode(", ", $blacklists);
+    }
+    
+    ?>
+    </pre>
+</div>
+
+<div class="step">
+    <span class="field">Senderscore</span>
+    <?php
+    
+    $score = $this->senderbase->getIP($ip) ?: "Error";
+    $class = strtolower($score);
+    $url = $this->senderbase->getUrl($ip);
+    
+    ?>
+    <a class="<?=$class?>" href="<?=$url?>"><?=$score?></a>
+</div>
+
+<div class="step">
+    <span class="field">Honeypot</span>
+    <?php
+    
+    $score = $this->honeypot->getIP($ip) ? 'Reported' : 'Neutral';
+    $class = strtolower($score);
+    $url = $this->honeypot->getUrl($ip);
+    
+    ?>
+    <a class="<?=$class?>" href="<?=$url?>"><?=$score?></a>
+</div>
+
+
+<?php endforeach; ?>

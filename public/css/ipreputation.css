@@ -1,0 +1,15 @@
+body, td {
+  
+}
+
+.step {
+    border: 1px solid #ccc;
+}
+
+.step .neutral {
+    color: darkgreen;
+}
+
+.step .error, .step .poor, .step .reported {
+    color: darkred;
+}

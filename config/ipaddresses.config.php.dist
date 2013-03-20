@@ -1,0 +1,8 @@
+<?php
+return array(
+    'bal_ip_reputation' => array(
+        'ipAddresses' => array(
+            '87.250.145.74',
+        ),
+    ),
+);
